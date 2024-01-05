@@ -18,6 +18,7 @@ class Completion:
         Parameters:
         - text_data: The input text data.
         """
+        logging.info("Completion class initiated")
         self.text_data = text_data
         # Initialize OpenAIEmbeddings, FAISS, and the question-answering chain
         self.embeddings = OpenAIEmbeddings()
@@ -35,6 +36,7 @@ class Completion:
         - Completion result based on the query.
         """
         # Perform similarity search and run the question-answering chain
+        logging.info("Completion's inference_completion meathod initiated")
         try:
             docs = self.document.similarity_search(query=query)
             completion = self.chain.run(input_documents=docs, question=query)

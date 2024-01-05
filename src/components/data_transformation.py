@@ -15,6 +15,7 @@ class DataTransformation:
         Parameters:
         - file_path (str): The path to the data file.
         """
+        logging.info('Data Transformation class initiated')
         self.file_path = file_path
 
     def resumereader(self):
@@ -24,6 +25,7 @@ class DataTransformation:
         Returns:
         - str: The extracted text from the PDF resume.
         """
+        logging.info("Data Transformation's resumereader meathod initiated")
         try:
             resume = PdfReader(self.file_path)
             resume_data = ''
@@ -47,6 +49,7 @@ class DataTransformation:
         Returns:
         - str: The split text.
         """
+        logging.info("Data Transformation's text_splitter meathod initiated")
         try:
             text_splitter = CharacterTextSplitter(
                 separator='\n',
