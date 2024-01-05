@@ -1,0 +1,6 @@
+Query: postgraduation
+Answer: MSc in Data Science, University of Edinburgh 2022 - 2023
+Query: postgraduation
+Answer: MSc in Data Science at the University of Edinburgh 2022-2023.
+Query: skills
+Answer: Skills include Python Libraries Numpy, Pandas, Scikit-Learn, PyTorch, Tensorflow, Hugging Face, PySpark, SciPy, Languages Python, R, SQL (SparkSQL, MySQL & Postgres), MATLAB, C, Java; Tools SAS, Tableau, PowerBI, Jupyter Notebook, Excel, Git, Docker; Cloud Computing Amazon Web Services (AWS), Azure Cloud.
