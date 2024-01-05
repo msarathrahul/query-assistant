@@ -1,24 +1,21 @@
+# Importing necessary modules
 import os
 import sys
 from sys import argv
 import pickle
 
-
+# Importing custom modules
 from src.components.data_ingestion import DataIngestion
 from src.components.data_transformation import DataTransformation
 from src.pipeline.completion import Completion
-
 from src.logger import logging
 from src.exception import CustomException
+from src.utilis import query_prompt, load_applicant, save_applicant, save_data
 
-from src.utilis import query_prompt
-from src.utilis import load_applicant,save_applicant
-from src.utilis import save_data
+# Setting OpenAI API key
+os.environ['OPENAI_API_KEY'] = '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'
 
-
-
-os.environ['OPENAI_API_KEY'] = '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'
-
+# Handling command line arguments
 if len(argv) > 2:
     applicant_id = argv[1]
     file_path = argv[2]
@@ -34,17 +31,19 @@ elif len(argv) == 2:
         print("Applicant ID doesn't exist. Please check the applicant id again")
         sys.exit()
 
-def main(file_path : str):
-    file = DataIngestion(file_path = file_path)
+# Main function for processing data
+def main(file_path: str):
+    file = DataIngestion(file_path=file_path)
     file_path = file.dataingestion_instance()
 
-    data_transformer = DataTransformation(file_path = file_path)
+    data_transformer = DataTransformation(file_path=file_path)
     resume_data = data_transformer.resumereader()
     text = data_transformer.text_splitter(resume_data=resume_data)
-    inference = Completion(text_data = text)
+    inference = Completion(text_data=text)
 
     return inference
 
+# Function for user interaction and querying
 def query_lopper(inference):
     data = []
     while True:
@@ -52,17 +51,18 @@ def query_lopper(inference):
         if query == '0':
             break
         else:
-            query_answer = inference.inference_completion(query = query).strip()
+            query_answer = inference.inference_completion(query=query).strip()
             print(query_answer)
-            print('*'*50,'\n')
-            data.append((query,query_answer))
+            print('*' * 50, '\n')
+            data.append((query, query_answer))
     return data
 
+# Entry point of the script
 if __name__ == '__main__':
     inference = main(file_path=file_path)
     data = query_lopper(inference)
+    
+    # Saving query and completion data
     for i in data:
-        question,answer = i[0],i[1]
-        save_data(id = applicant_id, query = question, completion = answer)
-
-
+        question, answer = i[0], i[1]
+        save_data(id=applicant_id, query=question, completion=answer)
