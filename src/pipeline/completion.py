@@ -23,7 +23,7 @@ class Completion:
         # Initialize OpenAIEmbeddings, FAISS, and the question-answering chain
         self.embeddings = OpenAIEmbeddings()
         self.document = FAISS.from_texts(text_data, embedding=self.embeddings)
-        self.chain = load_qa_chain(OpenAI(), chain_type='stuff')
+        self.chain = load_qa_chain(OpenAI(model='gpt-3.5-turbo-instruct',temperature = 0), chain_type='stuff')
 
     def inference_completion(self, query: str):
         """
