@@ -1,4 +1,4 @@
-## Welcome to AI-Powered Resume Query Assistant
+## Query Assistant
 
 ## Overview
 
